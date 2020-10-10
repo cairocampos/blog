@@ -99,7 +99,6 @@ class PostController extends Controller
     public function edit($id)
     {   
         $post = Post::find($id);
-
         return view("post.edit", [
             "post" => $post
         ]);
@@ -113,8 +112,54 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {    
+        $data = $request->only(["title", "subtitle", "content", "cover", "tags"]);
+
+        $post = Post::find($id);
+
+        if(!$post) {
+            return redirect()->route("posts");
+        }
+
+        if($data["title"] != $post->title) {
+            $data["slug"] = Str::slug($data["title"], "-");
+            
+            $validator = Validator::make($data, [
+                "title" => ["required", "string", "max:100"],
+                "subtitle" => ["required", "string"],
+                "content" => ["required", "string"],
+                "slug" => ["required", "unique:posts"],
+                "cover" => ["nullable", "image", "mimes:jpg,jpeg,png"],
+                "tags" => ["nullable","string"]
+            ]);
+
+        } else {
+            $validator = Validator::make($data, [
+                "title" => ["required", "string"],
+                "subtitle" => ["required", "string"],
+                "content" => ["required"]
+            ]);
+        }
+
+        if($validator->fails()) {
+            return redirect()->route("posts.edit", ["id" => $id])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $post->title = $data["title"];
+        $post->subtitle = $data["subtitle"];
+        $post->content = $data["content"];
+
+        if(!empty($data["slug"])) {
+            $post->slug = $data["slug"];
+        }
+
+        $post->save();
+
+        return redirect()->route("posts.edit", ["id" => $id])
+            ->with("status", "Post updated!");
+
     }
 
     /**

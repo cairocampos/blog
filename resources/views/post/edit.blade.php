@@ -18,6 +18,13 @@
   </div>
 @endif
 
+@if(session('status'))
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{session('status')}}
+  </div>
+@endif
+
 <form role="form" method="post">
     @csrf
       <div class="form-group">
@@ -38,8 +45,8 @@
         <label for="exampleInputFile"></label>
         <div class="input-group">
           <div class="custom-file">
-            <input type="file" class="custom-file-input" name="file" id="file">
-            <label class="custom-file-label" for="file">Choose file</label>
+            <input type="file" class="custom-file-input" name="cover" id="cover">
+            <label class="custom-file-label" for="cover">Choose file</label>
           </div>
           <div class="input-group-append">
             <span class="input-group-text" id="">Cover</span>
@@ -56,7 +63,6 @@
     </div>
   </form>
 @endsection
-
 
 
 @section("js")

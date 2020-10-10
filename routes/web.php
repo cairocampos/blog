@@ -25,7 +25,7 @@ Route::get("/posts", [PostController::class, "index"])->name("posts");
 Route::get("/posts/create", [PostController::class, "create"])->name("posts.create");
 Route::post("/posts/create", [PostController::class, "store"]);
 Route::get("/posts/edit/{id}", [PostController::class, "edit"])->name("posts.edit");
-Route::post("/posts/edit/{id}", [PostController::class, "edit"])->name("posts.update");
+Route::post("/posts/edit/{id}", [PostController::class, "update"])->name("posts.update");
 
 
 Route::post("/image_upload", [UploadController::class, "image"])->name("image_upload");

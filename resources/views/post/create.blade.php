@@ -66,7 +66,7 @@
             toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | table | link image | bullist numlist',
             images_upload_url:"{{route('image_upload')}}",
             images_upload_credentials:true,
-            convert_urls:true
+            convert_urls:false
         });
     </script>
 
