@@ -10,6 +10,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProjectController;
 
 Route::get("/login", [LoginController::class, "index"])->name("login");
 Route::post("/login", [LoginController::class, "authenticate"]);
@@ -34,3 +35,11 @@ Route::post("/image_upload", [UploadController::class, "image"])->name("image_up
 Route::get("/image_upload", [UploadController::class, "image"]);
 
 Route::get("/users", [UserController::class, "index"])->name("users.index");
+
+
+
+Route::get("/projects", [ProjectController::class, "index"])->name("projects.index");
+Route::get("/projects/create", [ProjectController::class, "create"])->name("projects.create");
+Route::post("/projects/create", [ProjectController::class, "store"]);
+Route::get("/projects/{id}/edit", [ProjectController::class, "edit"])->name("projects.edit");
+Route::post("/projects/{id}/edit", [ProjectController::class, "update"]);

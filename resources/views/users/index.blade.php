@@ -24,7 +24,11 @@
                     <td>{{$user->email}}</td>
                     <td>
                         <a href="#" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        @if($user->id == Auth::id())
+                            <button class="btn btn-sm" disabled>Me</button>
+                        @else 
+                            <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        @endif
                     </td>
                 </tr>
             @empty
