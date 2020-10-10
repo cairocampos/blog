@@ -244,7 +244,12 @@ return [
         [
             'text'        => 'Posts',
             'url'         => '/posts',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'far fa-fw fa-file-alt',
+        ],
+        [
+            'text'        => 'Users',
+            'url'         => '/users',
+            'icon'        => 'far fa-fw fa-user',
         ],
         [
             'text'        => 'Projects',

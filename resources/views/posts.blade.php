@@ -10,7 +10,7 @@
     
     <a href="{{route('posts.create')}}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Adicionar</a>
 
-    <table class="table my-2">
+    <table class="table my-2 table__posts">
         <thead>
             <th>#</th>
             <th>Titulo</th>
@@ -18,12 +18,12 @@
         </thead>
         <tbody>
             @forelse($posts as $post) 
-                <tr>
+                <tr id="{{$post->id}}"">
                     <td>{{$post->id}}</td>
                     <td>{{$post->title}}</td>
                     <td>
                         <a href="{{route('posts.edit', ["id" => $post->id])}}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-sm btn-danger btn-remove__post" id="{{$post->id}}"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>
             @empty 
@@ -32,4 +32,8 @@
         </tbody>
     </table>
     
+@endsection
+
+@section("js")
+    <script src="{{asset('js/app.js')}}"></script>
 @endsection
